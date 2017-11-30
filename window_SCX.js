@@ -78,7 +78,7 @@ while(counter <= 6 )
 	element_window.push(b[current_position_b-1], b[current_position_b - 2]);
 	element_window.push(b[current_position_b+1], b[current_position_b + 2]);
 	element_window = element_window.filter( onlyUnique );
-	//console.log("iteration "+counter + " "+ element_window);
+	console.log("iteration "+counter + "window - [ "+ element_window + " ]");
 	//find the minimum distance
 	var min = Infinity;
 	var index;
@@ -88,15 +88,17 @@ while(counter <= 6 )
 	for(var i = 0; i < element_window.length; i++)
 	{	
 		var current_window_element = element_window[i];
-		console.log("current_window_element "+  counter  + " = " +current_window_element);
-		if(matrix[current_element-1][current_window_element - 1] <= min && considered.includes(current_window_element) == false)
-		{
-			flag++;
-			min = matrix[current_element-1][current_window_element-1];
-			console.log(min);
-			index = current_window_element;
-			temp_cost = min;
-		}
+		console.log("current_window_element " +current_window_element);
+		
+			if(matrix[current_element-1][current_window_element - 1] <= min && (considered.includes(current_window_element) == false))
+			{
+				flag++;
+				min = matrix[current_element-1][current_window_element-1];
+				console.log(min);
+				index = current_window_element;
+				temp_cost = min;
+			}
+		
 	}
 	if(flag > 0)
 	{
@@ -125,8 +127,9 @@ while(counter <= 6 )
 	current_position_b = dup_b.indexOf(index);
 	current_position_b+=2;
 	element_window = [];
-	console.log("current considered = "+considered);
+	console.log("current_pos = "+current_position + " current_pos_b = "+current_position_b );
+	console.log("current considered = [ "+considered + " ]");
 
 }
-
+total_cost += matrix[index-1][0];
 console.log("Total Cost = "+total_cost);
