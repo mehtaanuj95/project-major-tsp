@@ -81,7 +81,7 @@ while(counter <= 6 )
 	for(var i = 0; i < element_window.length; i++)
 	{	
 		var current_window_element = element_window[i];
-		console.log("current_window_element " +current_window_element);
+		//console.log("current_window_element " +current_window_element);
 		
 			if(matrix[current_element-1][current_window_element - 1] <= min && (considered.includes(current_window_element) == false))
 			{
@@ -120,7 +120,7 @@ while(counter <= 6 )
 	current_position_b = dup_b.indexOf(index);
 	current_position_b+=2;
 	element_window = [];
-	console.log("current_pos = "+current_position + " current_pos_b = "+current_position_b );
+	//console.log("current_pos = "+current_position + " current_pos_b = "+current_position_b );
 	console.log("current considered = [ "+considered + " ]");
 
 }
