@@ -24,7 +24,7 @@ function startAlgo(costMatrix){
    var crossoverProb = 80;
    var noOfGenerations = 100;
    var startCity = 1;
-   var cx = 'nbx';
+   var cx = 'wcx';
    var population = generate.generation(totalCities,populationCount,startCity);
    var newPop = [];
    //console.log(population);
