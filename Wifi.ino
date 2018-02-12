@@ -1,14 +1,14 @@
 #include <ESP8266WiFi.h>
  
-const char* ssid     = "Abhi";
-const char* password = "chiku123";
+const char* ssid     = "Abhishek";
+const char* password = "kartik2002";
  
 const char* host = "api.thingspeak.com";
  
 int value = 1; 
  
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(9600);
   delay(10);
  
   // We start by connecting to a WiFi network
@@ -54,12 +54,14 @@ void loop() {
   
   // This will send the request to the server
  Client.print(String("GET ") + url + "&headers=false" + " HTTP/1.1\r\n" + "Host: " + host + "\r\n" + "Connection: close\r\n\r\n");
-  delay(500);
+  delay(5000);
   
   // Read all the lines of the reply from server and print them to Serial
   while(Client.available()){
-    int x=Client.read();
-  Serial.print(x);
+    Serial.print("Heelloo");
+    String z=Client.readStringUntil('\n');
+   
+  Serial.print(z);
  }
   Serial.println("");
   Serial.println(String("Try nr. ") + value + " is finished.");
