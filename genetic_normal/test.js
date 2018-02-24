@@ -1,5 +1,14 @@
+module.exports = {
+        proceedForward: function(mat){
+		startAlgo(mat);
+        }
+} 
+const readTspFile = require('./readFile');
+
+
 var cities = [];
-var totalCities = 100;
+var totalCities = 24;
+readTspFile.getMatrix('tsp24.txt',totalCities);
 
 var popSize = 50;
 var population = [];
@@ -25,12 +34,12 @@ var xMax = 500;     //These values are pixels
 var yMax = 500;
 
 //Cost MAtrix
-var cost = [];
+//var cost = [];
 
 
   //Create cost matrix
   //Step - 1 : Create lower trianglualr matrix
-  for(var i = 0; i < totalCities; i++)
+  /*for(var i = 0; i < totalCities; i++)
   {
     cost[i] = new Array(totalCities);
     for(var j = 0; j <= i; j++ )
@@ -51,8 +60,12 @@ var cost = [];
     {
       cost[i][j] = cost[j][i];
     }
-  }
+  }*/
+  function startAlgo(cost){
   //console.table(cost);
+  var d;
+  d = new Date();
+  startTime = d.getTime();
   
   var order = [];
   //Create initial random order of cities
@@ -74,14 +87,9 @@ var cost = [];
 
 for(var z = 0; z < 100; z++) {
 
-  var d;
-  if(currentGeneration == 1) {
-    d = new Date();
-    startTime = d.getTime();
-  }
   
   // GA
-  calculateFitness();
+  calculateFitness(cost);
   normalizeFitness();
   nextGeneration();
 
@@ -99,6 +107,7 @@ for(var z = 0; z < 100; z++) {
     break;
   }
 }
+}
 ///////////////////
 function swap(a, i, j) {
   var temp = a[i];
@@ -107,7 +116,7 @@ function swap(a, i, j) {
 }
 
 
-function calcDistance(points, order) 
+function calcDistance(points, order,cost) 
 {
   var sum = 0;
   for (var i = 0; i < (order.length - 2); i++) {
@@ -116,16 +125,16 @@ function calcDistance(points, order)
     var cityBIndex = order[i + 1];
     //var cityB = points[cityBIndex];
     //var d = dist(cityA.x, cityA.y, cityB.x, cityB.y);
-    var d = cost[cityAIndex][cityBIndex];
+    var d = Number(cost[cityAIndex][cityBIndex]);
     sum += d;
   }
   return sum;
 }
 
-function calculateFitness() {
+function calculateFitness(cost) {
   var currentRecord = Infinity;
   for (var i = 0; i < population.length; i++) {
-    var d = calcDistance(cities, population[i]);
+    var d = calcDistance(cities, population[i],cost);
     if (d < recordDistance) {
       recordDistance = d;
       bestEver = population[i];
